@@ -4,11 +4,8 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
-import android.util.Log;
-
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,7 +13,7 @@ public class PublicMethods {
     public static final String LOG_TAG = "mlkit_tag";
     private static final int PERMISSION_REQUESTS = 1;
 
-    public static String[] getRequiredPermissions(Activity mActivity) {
+    private static String[] getRequiredPermissions(Activity mActivity) {
         try {
             PackageInfo info =
                     mActivity.getPackageManager()
@@ -55,7 +52,7 @@ public class PublicMethods {
         }
     }
 
-    public static boolean isPermissionGranted(Context context, String permission) {
+    private static boolean isPermissionGranted(Context context, String permission) {
         return ContextCompat.checkSelfPermission(context, permission)
                 == PackageManager.PERMISSION_GRANTED;
     }

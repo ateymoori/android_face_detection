@@ -2,6 +2,14 @@
 
 
  
+Version 1.0.2 *(July 20, 2019 )*
+----------------------------
+
+First commit. 
+ * Add: Get position of detected face and compare with Face Frame position.
+ * Add: Detect face located in true position and send the status with interfaces to Activity.
+
+ 
 Version 1.0.1 *(July 20, 2019 )*
 ----------------------------
 

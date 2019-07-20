@@ -13,37 +13,56 @@
 // limitations under the License.
 package amir.face.detection.ui;
 
+import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.View;
+import android.view.WindowManager;
+import android.widget.ImageView;
 import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat.OnRequestPermissionsResultCallback;
+import androidx.core.content.ContextCompat;
+
 import com.google.android.gms.common.annotation.KeepName;
+import com.google.firebase.ml.vision.face.FirebaseVisionFace;
+
 import java.io.IOException;
+
 import amir.face.detection.R;
 import amir.face.detection.utils.common.CameraSource;
 import amir.face.detection.utils.common.CameraSourcePreview;
+import amir.face.detection.utils.common.FaceDetectStatus;
+import amir.face.detection.utils.common.FrameMetadata;
+import amir.face.detection.utils.common.FrameReturn;
 import amir.face.detection.utils.common.GraphicOverlay;
 import amir.face.detection.utils.common.PublicMethods;
 import amir.face.detection.utils.visions.FaceDetectionProcessor;
 
+
 @KeepName
 public final class MainActivity extends AppCompatActivity
-        implements OnRequestPermissionsResultCallback {
+        implements OnRequestPermissionsResultCallback, FrameReturn, FaceDetectStatus {
     private static final String FACE_DETECTION = "Face Detection";
     private static final String TAG = "MLKitTAG";
 
     private CameraSource cameraSource = null;
     private CameraSourcePreview preview;
     private GraphicOverlay graphicOverlay;
+    private ImageView faceFrame;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_main);
 
         preview = findViewById(R.id.firePreview);
+        faceFrame = findViewById(R.id.faceFrame);
         if (preview == null) {
             Log.d(TAG, "Preview is null");
         }
@@ -64,7 +83,10 @@ public final class MainActivity extends AppCompatActivity
             cameraSource = new CameraSource(this, graphicOverlay);
         }
         try {
-            cameraSource.setMachineLearningFrameProcessor(new FaceDetectionProcessor(getResources()));
+            FaceDetectionProcessor processor = new FaceDetectionProcessor(getResources());
+            processor.frameHandler = this;
+            processor.faceDetectStatus = this;
+            cameraSource.setMachineLearningFrameProcessor(processor);
         } catch (Exception e) {
             Log.e(TAG, "Can not create image processor: " + FACE_DETECTION, e);
             Toast.makeText(
@@ -125,4 +147,18 @@ public final class MainActivity extends AppCompatActivity
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
     }
 
+
+    //calls with each frame which includes by face
+    @Override
+    public void onFrame(Bitmap image, FirebaseVisionFace face, FrameMetadata frameMetadata, GraphicOverlay graphicOverlay) {
+
+    }
+    @Override
+    public void onFaceLocated() {
+        faceFrame.setColorFilter(ContextCompat.getColor(this, R.color.green));
+    }
+    @Override
+    public void onFaceNotLocated() {
+        faceFrame.setColorFilter(ContextCompat.getColor(this, R.color.red));
+    }
 }

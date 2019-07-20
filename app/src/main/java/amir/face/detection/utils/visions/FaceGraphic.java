@@ -18,14 +18,12 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.graphics.Rect;
 import android.util.Log;
 
 import com.google.android.gms.vision.CameraSource;
-import com.google.firebase.ml.vision.common.FirebaseVisionPoint;
 import com.google.firebase.ml.vision.face.FirebaseVisionFace;
-import com.google.firebase.ml.vision.face.FirebaseVisionFaceLandmark;
 
+import amir.face.detection.utils.common.FaceDetectStatus;
 import amir.face.detection.utils.common.GraphicOverlay;
 
 
@@ -49,6 +47,9 @@ public class FaceGraphic extends GraphicOverlay.Graphic {
     private volatile FirebaseVisionFace firebaseVisionFace;
 
     private final Bitmap overlayBitmap;
+
+    public FaceDetectStatus  faceDetectStatus = null;
+
 
     public FaceGraphic(GraphicOverlay overlay, FirebaseVisionFace face, int facing, Bitmap overlayBitmap) {
         super(overlay);
@@ -125,53 +126,22 @@ public class FaceGraphic extends GraphicOverlay.Graphic {
         float right = x + xOffset;
         float bottom = y + yOffset;
         canvas.drawRect(left, top, right, bottom, boxPaint);
-        Log.d("dddf", left + "-" + top + "-" + right + "-" + bottom + "");
+//        Log.d("dddf", "left: "+left + " top: " + top + " right : " + right + " bottom : " + bottom  );
 
+        if (
 
-        // draw landmarks
-        drawLandmarkPosition(canvas, face, FirebaseVisionFaceLandmark.MOUTH_BOTTOM);
-        drawLandmarkPosition(canvas, face, FirebaseVisionFaceLandmark.LEFT_CHEEK);
-        drawLandmarkPosition(canvas, face, FirebaseVisionFaceLandmark.LEFT_EAR);
-        drawLandmarkPosition(canvas, face, FirebaseVisionFaceLandmark.MOUTH_LEFT);
-        drawLandmarkPosition(canvas, face, FirebaseVisionFaceLandmark.LEFT_EYE);
-        drawBitmapOverLandmarkPosition(canvas, face, FirebaseVisionFaceLandmark.NOSE_BASE);
-        drawLandmarkPosition(canvas, face, FirebaseVisionFaceLandmark.RIGHT_CHEEK);
-        drawLandmarkPosition(canvas, face, FirebaseVisionFaceLandmark.RIGHT_EAR);
-        drawLandmarkPosition(canvas, face, FirebaseVisionFaceLandmark.RIGHT_EYE);
-        drawLandmarkPosition(canvas, face, FirebaseVisionFaceLandmark.MOUTH_RIGHT);
-    }
-
-    private void drawLandmarkPosition(Canvas canvas, FirebaseVisionFace face, int landmarkID) {
-        FirebaseVisionFaceLandmark landmark = face.getLandmark(landmarkID);
-        if (landmark != null) {
-            FirebaseVisionPoint point = landmark.getPosition();
-            canvas.drawCircle(
-                    translateX(point.getX()),
-                    translateY(point.getY()),
-                    10f, idPaint);
-        }
-    }
-
-    private void drawBitmapOverLandmarkPosition(Canvas canvas, FirebaseVisionFace face, int landmarkID) {
-        FirebaseVisionFaceLandmark landmark = face.getLandmark(landmarkID);
-        if (landmark == null) {
-            return;
-        }
-
-        FirebaseVisionPoint point = landmark.getPosition();
-
-        if (overlayBitmap != null) {
-            float imageEdgeSizeBasedOnFaceSize = (face.getBoundingBox().width() / 4.0f);
-            int left = (int) (translateX(point.getX()) - imageEdgeSizeBasedOnFaceSize);
-            int top = (int) (translateY(point.getY()) - imageEdgeSizeBasedOnFaceSize);
-            int right = (int) (translateX(point.getX()) + imageEdgeSizeBasedOnFaceSize);
-            int bottom = (int) (translateY(point.getY()) + imageEdgeSizeBasedOnFaceSize);
-
-            canvas.drawBitmap(overlayBitmap,
-                    null,
-                    new Rect(left, top, right, bottom),
-                    null);
+                left < 190 &&
+                        top < 450 &&
+                        right > 850 &&
+                        bottom > 1050
+        ) {
+            Log.d("dddf", "nooooowwwwww");
+            Log.d("dddf", "left: " + left + " top: " + top + " right : " + right + " bottom : " + bottom);
+            if(faceDetectStatus!=null) faceDetectStatus.onFaceLocated();
+        }else{
+            if(faceDetectStatus!=null) faceDetectStatus.onFaceNotLocated();
         }
 
     }
+
 }

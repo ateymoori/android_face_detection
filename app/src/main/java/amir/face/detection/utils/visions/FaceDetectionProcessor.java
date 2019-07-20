@@ -34,20 +34,22 @@ import java.util.List;
 
 import amir.face.detection.R;
 import amir.face.detection.utils.common.CameraImageGraphic;
+import amir.face.detection.utils.common.FaceDetectStatus;
 import amir.face.detection.utils.common.FrameMetadata;
+import amir.face.detection.utils.common.FrameReturn;
 import amir.face.detection.utils.common.GraphicOverlay;
 import amir.face.detection.utils.common.VisionProcessorBase;
 
-import static amir.face.detection.utils.common.PublicMethods.LOG_TAG;
 
-
-public class FaceDetectionProcessor extends VisionProcessorBase<List<FirebaseVisionFace>> {
+public class FaceDetectionProcessor extends VisionProcessorBase<List<FirebaseVisionFace>> implements FaceDetectStatus {
 
     private static final String TAG = "FaceDetectionProcessor";
-
+    public FaceDetectStatus faceDetectStatus = null;
     private final FirebaseVisionFaceDetector detector;
 
     private final Bitmap overlayBitmap;
+
+    public FrameReturn frameHandler = null;
 
     public FaceDetectionProcessor(Resources resources) {
         FirebaseVisionFaceDetectorOptions options =
@@ -88,12 +90,14 @@ public class FaceDetectionProcessor extends VisionProcessorBase<List<FirebaseVis
         }
         for (int i = 0; i < faces.size(); ++i) {
             FirebaseVisionFace face = faces.get(i);
-
-            Log.d(LOG_TAG , face.toString());
+            if (frameHandler != null) {
+                frameHandler.onFrame(originalCameraImage, face, frameMetadata, graphicOverlay);
+            }
             int cameraFacing =
                     frameMetadata != null ? frameMetadata.getCameraFacing() :
                             Camera.CameraInfo.CAMERA_FACING_BACK;
             FaceGraphic faceGraphic = new FaceGraphic(graphicOverlay, face, cameraFacing, overlayBitmap);
+            faceGraphic.faceDetectStatus = this;
             graphicOverlay.add(faceGraphic);
         }
         graphicOverlay.postInvalidate();
@@ -102,5 +106,15 @@ public class FaceDetectionProcessor extends VisionProcessorBase<List<FirebaseVis
     @Override
     protected void onFailure(@NonNull Exception e) {
         Log.e(TAG, "Face detection failed " + e);
+    }
+
+    @Override
+    public void onFaceLocated() {
+        if (faceDetectStatus != null) faceDetectStatus.onFaceLocated();
+    }
+
+    @Override
+    public void onFaceNotLocated() {
+        if (faceDetectStatus != null) faceDetectStatus.onFaceNotLocated();
     }
 }

@@ -13,67 +13,71 @@
 // limitations under the License.
 package amir.face.detection.utils.common;
 
-/** Describing a frame info. */
+/**
+ * Describing a frame info.
+ */
 public class FrameMetadata {
 
-  private final int width;
-  private final int height;
-  private final int rotation;
-  private final int cameraFacing;
+    private final int width;
+    private final int height;
+    private final int rotation;
+    private final int cameraFacing;
 
-  public int getWidth() {
-    return width;
-  }
-
-  public int getHeight() {
-    return height;
-  }
-
-  public int getRotation() {
-    return rotation;
-  }
-
-  public int getCameraFacing() {
-    return cameraFacing;
-  }
-
-  private FrameMetadata(int width, int height, int rotation, int facing) {
-    this.width = width;
-    this.height = height;
-    this.rotation = rotation;
-    cameraFacing = facing;
-  }
-
-  /** Builder of {@link FrameMetadata}. */
-  public static class Builder {
-
-    private int width;
-    private int height;
-    private int rotation;
-    private int cameraFacing;
-
-    public Builder setWidth(int width) {
-      this.width = width;
-      return this;
+    int getWidth() {
+        return width;
     }
 
-    public Builder setHeight(int height) {
-      this.height = height;
-      return this;
+    int getHeight() {
+        return height;
     }
 
-    public Builder setRotation(int rotation) {
-      this.rotation = rotation;
-      return this;
+    int getRotation() {
+        return rotation;
     }
 
-    public Builder setCameraFacing(int facing) {
-      cameraFacing = facing;
-      return this;
+    public int getCameraFacing() {
+        return cameraFacing;
     }
 
-    public FrameMetadata build() {
-      return new FrameMetadata(width, height, rotation, cameraFacing);
+    private FrameMetadata(int width, int height, int rotation, int facing) {
+        this.width = width;
+        this.height = height;
+        this.rotation = rotation;
+        cameraFacing = facing;
     }
-  }
+
+    /**
+     * Builder of {@link FrameMetadata}.
+     */
+    static class Builder {
+
+        private int width;
+        private int height;
+        private int rotation;
+        private int cameraFacing;
+
+        Builder setWidth(int width) {
+            this.width = width;
+            return this;
+        }
+
+        Builder setHeight(int height) {
+            this.height = height;
+            return this;
+        }
+
+        Builder setRotation(int rotation) {
+            this.rotation = rotation;
+            return this;
+        }
+
+        Builder setCameraFacing(int facing) {
+            cameraFacing = facing;
+            return this;
+        }
+
+        FrameMetadata build() {
+            return new FrameMetadata(width, height, rotation, cameraFacing);
+        }
+    }
 }

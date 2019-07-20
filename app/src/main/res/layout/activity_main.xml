@@ -4,23 +4,32 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#000"
-    android:keepScreenOn="true"
-    android:orientation="vertical">
+    android:keepScreenOn="true">
 
     <amir.face.detection.utils.common.CameraSourcePreview
         android:id="@+id/firePreview"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true">
+        android:layout_height="match_parent">
+
 
         <amir.face.detection.utils.common.GraphicOverlay
             android:id="@+id/fireFaceOverlay"
             android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <ImageView
+            android:id="@+id/faceFrame"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentBottom="true" />
+            android:layout_centerInParent="true"
+            android:padding="56dp"
+            android:elevation="2dp"
+            android:scaleType="fitXY"
+            android:layout_margin="24dp"
+            android:src="@drawable/face_shape"
+            android:adjustViewBounds="true"
+            android:tint="#F33131" />
+
     </amir.face.detection.utils.common.CameraSourcePreview>
 
 
