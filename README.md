@@ -1,14 +1,21 @@
 # Android MLKit Sample (Google machine learning - Face Detection)
 
+<img src="http://devcast.ir/mlkit.png" alt="google firebase mlkit face detection machine learning " width=600 />
 
- 
+This repository contains a simple Android application that implements Google firebase MLKit(Machine learning kit) to face detection.
+To avoid complication i used JAVA 8 and not implemented any architecture pattern (MVP or MVVM).
+Otherwise you can get a MVVM/Kotlin and LiveData simple project with follow my other sample project.
+
+<a href="https://github.com/ateymoori/mulight">Mulight, a simple MVVM/Kotlin/LiveData/RX pattern in Android</a>
+
+
 Version 1.0.4 *(July 21, 2019 )*
 ----------------------------
 
 First commit. 
  * Add: Add monitor eye opening status for each eye.
- * Fix: Output image position fixed
- * Add: Save image in internal storage to avoid get extra permission, 
+ * Fix: Output image position fixed.
+ * Add: Save image in internal storage to avoid get extra permission.
 
  
 Version 1.0.3 *(July 21, 2019 )*
@@ -16,7 +23,7 @@ Version 1.0.3 *(July 21, 2019 )*
 
 First commit. 
  * Add: Detect Face located in frame. 
- * Add: Capture image added,
+ * Add: Capture image added.
  * Add: ImageViewer activity added.
 
  
