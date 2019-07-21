@@ -2,18 +2,26 @@ package amir.face.detection.utils.base;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.ContextWrapper;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.util.DisplayMetrics;
 import android.view.Display;
 
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class PublicMethods {
-    public static final String LOG_TAG = "mlkit_tag";
     private static final int PERMISSION_REQUESTS = 1;
 
     private static String[] getRequiredPermissions(Activity mActivity) {
@@ -60,15 +68,45 @@ public class PublicMethods {
                 == PackageManager.PERMISSION_GRANTED;
     }
 
-    public static float getScreenWidth(Activity mActivity){
+    public static float getScreenWidth(Activity mActivity) {
         DisplayMetrics displaymetrics = new DisplayMetrics();
         mActivity.getWindowManager().getDefaultDisplay().getMetrics(displaymetrics);
         return displaymetrics.widthPixels;
     }
-    public static float getScreenHeight(Activity mActivity){
+
+    public static float getScreenHeight(Activity mActivity) {
         DisplayMetrics displaymetrics = new DisplayMetrics();
         mActivity.getWindowManager().getDefaultDisplay().getMetrics(displaymetrics);
         return displaymetrics.heightPixels;
+    }
+
+
+    public static String saveToInternalStorage(Bitmap bitmapImage,String fileName, Context mContext) {
+        File directory = mContext.getDir("imageDir", Context.MODE_PRIVATE);
+        File imgPath = new File(directory, fileName);
+        FileOutputStream fos = null;
+        try {
+            fos = new FileOutputStream(imgPath);
+            bitmapImage.compress(Bitmap.CompressFormat.PNG, 100, fos);
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                fos.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return directory.getAbsolutePath();
+    }
+
+    public static Bitmap getBitmapByPath(String path , String fileName) {
+        try {
+            File f=new File(path, fileName);
+            return BitmapFactory.decodeStream(new FileInputStream(f));
+        } catch (FileNotFoundException e) {
+            return null;
+        }
     }
 
 }

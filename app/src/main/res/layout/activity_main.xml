@@ -43,7 +43,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginBottom="32dp"
         android:background="@drawable/button_selector"
         android:enabled="false"
         android:foreground="?android:attr/selectableItemBackground"
@@ -51,21 +51,59 @@
         android:textColor="#fff"
         app:layout_constraintBottom_toBottomOf="@+id/firePreview"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/leftEyeStatus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="60dp"
+        android:text="Please Open your left eye"
+        android:textColor="#fff"
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@+id/takePhoto"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.032"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.98" />
+
+    <TextView
+        android:id="@+id/rightEyeStatus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="28dp"
+        android:text="Please Open your right eye"
+        android:textColor="#fff"
+        app:layout_constraintBottom_toTopOf="@+id/takePhoto"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.034"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/leftEyeStatus" />
 
     <ImageView
         android:id="@+id/test"
         android:layout_width="72dp"
         android:layout_height="wrap_content"
-        android:minHeight="100dp"
         android:layout_alignParentBottom="true"
         android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
+        android:visibility="gone"
         android:layout_marginBottom="8dp"
         android:adjustViewBounds="true"
+        android:minHeight="100dp"
         app:layout_constraintBottom_toTopOf="@+id/takePhoto"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.947"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintHorizontal_bias="0.975"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.985" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

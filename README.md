@@ -2,6 +2,15 @@
 
 
  
+Version 1.0.4 *(July 21, 2019 )*
+----------------------------
+
+First commit. 
+ * Add: Add monitor eye opening status for each eye.
+ * Fix: Output image position fixed
+ * Add: Save image in internal storage to avoid get extra permission, 
+
+ 
 Version 1.0.3 *(July 21, 2019 )*
 ----------------------------
 
