@@ -1,8 +1,8 @@
 
 # Android MLKit Sample (Google machine learning - Face Detection)  
   
-<img src="http://devcast.ir/faceDetection.gif" width=300 alt="google firebase mlkit face detection machine learning" />  
-  
+![](faceDetection.gif)
+
   
   
 <img src="http://devcast.ir/mlkit.png" alt="google firebase mlkit face detection machine learning " width=600 />  
