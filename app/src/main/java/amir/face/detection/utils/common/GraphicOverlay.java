@@ -67,11 +67,41 @@ public class GraphicOverlay extends View {
     /**
      * Adjusts a horizontal value of the supplied value from the preview scale to the view scale.
      */
-      float scaleX(float horizontal) {
+    protected float scaleX(float horizontal) {
       return horizontal * overlay.widthScaleFactor;
     }
 
+    /** Adjusts a vertical value of the supplied value from the preview scale to the view scale. */
+    public float scaleY(float vertical) {
+      return vertical * overlay.heightScaleFactor;
+    }
 
+    /** Returns the application context of the app. */
+    public Context getApplicationContext() {
+      return overlay.getContext().getApplicationContext();
+    }
+
+    /**
+     * Adjusts the x coordinate from the preview's coordinate system to the view coordinate system.
+     */
+    public float translateX(float x) {
+      if (overlay.facing == CameraSource.CAMERA_FACING_FRONT) {
+        return overlay.getWidth() - scaleX(x);
+      } else {
+        return scaleX(x);
+      }
+    }
+
+    /**
+     * Adjusts the y coordinate from the preview's coordinate system to the view coordinate system.
+     */
+    public float translateY(float y) {
+      return scaleY(y);
+    }
+
+    public void postInvalidate() {
+      overlay.postInvalidate();
+    }
   }
 
   public GraphicOverlay(Context context, AttributeSet attrs) {

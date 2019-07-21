@@ -7,4 +7,12 @@
 
     <color name="red" >#EE2C2C</color>
     <color name="green" >#4BC752</color>
+
+    <color name="blue_light">#00B4DB</color>
+    <color name="blue_dark">#0083B0</color>
+
+    <color name="gray_light">#A2A2A2</color>
+    <color name="gray_dark">#757575</color>
+
+
 </resources>

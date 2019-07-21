@@ -1,4 +1,4 @@
-package amir.face.detection.utils;
+package amir.face.detection.utils.base;
 
 import android.app.Application;
 

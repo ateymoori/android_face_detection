@@ -23,8 +23,9 @@ import android.util.Log;
 import com.google.android.gms.vision.CameraSource;
 import com.google.firebase.ml.vision.face.FirebaseVisionFace;
 
-import amir.face.detection.utils.common.FaceDetectStatus;
+import amir.face.detection.utils.interfaces.FaceDetectStatus;
 import amir.face.detection.utils.common.GraphicOverlay;
+import amir.face.detection.utils.models.RectModel;
 
 
 /**
@@ -32,10 +33,7 @@ import amir.face.detection.utils.common.GraphicOverlay;
  * graphic overlay view.
  */
 public class FaceGraphic extends GraphicOverlay.Graphic {
-    private static final float FACE_POSITION_RADIUS = 4.0f;
     private static final float ID_TEXT_SIZE = 30.0f;
-    private static final float ID_Y_OFFSET = 50.0f;
-    private static final float ID_X_OFFSET = -50.0f;
     private static final float BOX_STROKE_WIDTH = 5.0f;
 
     private int facing;
@@ -48,10 +46,10 @@ public class FaceGraphic extends GraphicOverlay.Graphic {
 
     private final Bitmap overlayBitmap;
 
-    public FaceDetectStatus  faceDetectStatus = null;
+    FaceDetectStatus  faceDetectStatus = null;
 
 
-    public FaceGraphic(GraphicOverlay overlay, FirebaseVisionFace face, int facing, Bitmap overlayBitmap) {
+    FaceGraphic(GraphicOverlay overlay, FirebaseVisionFace face, int facing, Bitmap overlayBitmap) {
         super(overlay);
 
         firebaseVisionFace = face;
@@ -87,36 +85,6 @@ public class FaceGraphic extends GraphicOverlay.Graphic {
         // of the face's bounding box
         float x = translateX(face.getBoundingBox().centerX());
         float y = translateY(face.getBoundingBox().centerY());
-        canvas.drawCircle(x, y - 4 * ID_Y_OFFSET, FACE_POSITION_RADIUS, facePositionPaint);
-        canvas.drawText("id:: " + face.getTrackingId(), x + ID_X_OFFSET, y - 3 * ID_Y_OFFSET, idPaint);
-        canvas.drawText(
-                "happiness: " + String.format("%.2f", face.getSmilingProbability()),
-                x + ID_X_OFFSET * 3,
-                y - 2 * ID_Y_OFFSET,
-                idPaint);
-        if (facing == CameraSource.CAMERA_FACING_FRONT) {
-            canvas.drawText(
-                    "right eye: " + String.format("%.2f", face.getRightEyeOpenProbability()),
-                    x - ID_X_OFFSET,
-                    y,
-                    idPaint);
-            canvas.drawText(
-                    "left eye: " + String.format("%.2f", face.getLeftEyeOpenProbability()),
-                    x + ID_X_OFFSET * 6,
-                    y,
-                    idPaint);
-        } else {
-            canvas.drawText(
-                    "left eye: " + String.format("%.2f", face.getLeftEyeOpenProbability()),
-                    x - ID_X_OFFSET,
-                    y,
-                    idPaint);
-            canvas.drawText(
-                    "right eye: " + String.format("%.2f", face.getRightEyeOpenProbability()),
-                    x + ID_X_OFFSET * 6,
-                    y,
-                    idPaint);
-        }
 
         // Draws a bounding box around the face.
         float xOffset = scaleX(face.getBoundingBox().width() / 2.0f);
@@ -125,19 +93,16 @@ public class FaceGraphic extends GraphicOverlay.Graphic {
         float top = y - yOffset;
         float right = x + xOffset;
         float bottom = y + yOffset;
-        canvas.drawRect(left, top, right, bottom, boxPaint);
-//        Log.d("dddf", "left: "+left + " top: " + top + " right : " + right + " bottom : " + bottom  );
+      //  canvas.drawRect(left, top, right, bottom, boxPaint);
 
         if (
-
                 left < 190 &&
                         top < 450 &&
                         right > 850 &&
                         bottom > 1050
         ) {
-            Log.d("dddf", "nooooowwwwww");
-            Log.d("dddf", "left: " + left + " top: " + top + " right : " + right + " bottom : " + bottom);
-            if(faceDetectStatus!=null) faceDetectStatus.onFaceLocated();
+
+            if(faceDetectStatus!=null) faceDetectStatus.onFaceLocated(new RectModel(left,top,right,bottom));
         }else{
             if(faceDetectStatus!=null) faceDetectStatus.onFaceNotLocated();
         }

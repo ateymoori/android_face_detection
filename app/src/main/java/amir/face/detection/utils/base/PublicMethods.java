@@ -1,9 +1,12 @@
-package amir.face.detection.utils.common;
+package amir.face.detection.utils.base;
 
 import android.app.Activity;
 import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.util.DisplayMetrics;
+import android.view.Display;
+
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import java.util.ArrayList;
@@ -55,6 +58,17 @@ public class PublicMethods {
     private static boolean isPermissionGranted(Context context, String permission) {
         return ContextCompat.checkSelfPermission(context, permission)
                 == PackageManager.PERMISSION_GRANTED;
+    }
+
+    public static float getScreenWidth(Activity mActivity){
+        DisplayMetrics displaymetrics = new DisplayMetrics();
+        mActivity.getWindowManager().getDefaultDisplay().getMetrics(displaymetrics);
+        return displaymetrics.widthPixels;
+    }
+    public static float getScreenHeight(Activity mActivity){
+        DisplayMetrics displaymetrics = new DisplayMetrics();
+        mActivity.getWindowManager().getDefaultDisplay().getMetrics(displaymetrics);
+        return displaymetrics.heightPixels;
     }
 
 }

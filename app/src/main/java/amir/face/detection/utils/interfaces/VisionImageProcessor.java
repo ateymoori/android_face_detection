@@ -11,13 +11,16 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-package amir.face.detection.utils.common;
+package amir.face.detection.utils.interfaces;
 
 import android.graphics.Bitmap;
 
 import com.google.firebase.ml.common.FirebaseMLException;
 
 import java.nio.ByteBuffer;
+
+import amir.face.detection.utils.common.FrameMetadata;
+import amir.face.detection.utils.common.GraphicOverlay;
 
 /** An inferface to process the images with different ML Kit detectors and custom image models. */
 public interface VisionImageProcessor {

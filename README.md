@@ -2,6 +2,15 @@
 
 
  
+Version 1.0.3 *(July 21, 2019 )*
+----------------------------
+
+First commit. 
+ * Add: Detect Face located in frame. 
+ * Add: Capture image added,
+ * Add: ImageViewer activity added.
+
+ 
 Version 1.0.2 *(July 20, 2019 )*
 ----------------------------
 

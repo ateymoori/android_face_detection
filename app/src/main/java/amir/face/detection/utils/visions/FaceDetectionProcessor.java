@@ -34,11 +34,12 @@ import java.util.List;
 
 import amir.face.detection.R;
 import amir.face.detection.utils.common.CameraImageGraphic;
-import amir.face.detection.utils.common.FaceDetectStatus;
+import amir.face.detection.utils.interfaces.FaceDetectStatus;
 import amir.face.detection.utils.common.FrameMetadata;
-import amir.face.detection.utils.common.FrameReturn;
+import amir.face.detection.utils.interfaces.FrameReturn;
 import amir.face.detection.utils.common.GraphicOverlay;
 import amir.face.detection.utils.common.VisionProcessorBase;
+import amir.face.detection.utils.models.RectModel;
 
 
 public class FaceDetectionProcessor extends VisionProcessorBase<List<FirebaseVisionFace>> implements FaceDetectStatus {
@@ -109,8 +110,8 @@ public class FaceDetectionProcessor extends VisionProcessorBase<List<FirebaseVis
     }
 
     @Override
-    public void onFaceLocated() {
-        if (faceDetectStatus != null) faceDetectStatus.onFaceLocated();
+    public void onFaceLocated(RectModel rectModel) {
+        if (faceDetectStatus != null) faceDetectStatus.onFaceLocated(rectModel);
     }
 
     @Override

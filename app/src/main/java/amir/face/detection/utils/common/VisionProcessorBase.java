@@ -27,6 +27,8 @@ import com.google.firebase.ml.vision.common.FirebaseVisionImageMetadata;
 
 import java.nio.ByteBuffer;
 
+import amir.face.detection.utils.interfaces.VisionImageProcessor;
+
 
 public abstract class VisionProcessorBase<T> implements VisionImageProcessor {
 

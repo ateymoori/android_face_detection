@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/fireTopLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -9,6 +10,8 @@
     <amir.face.detection.utils.common.CameraSourcePreview
         android:id="@+id/firePreview"
         android:layout_width="match_parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         android:layout_height="match_parent">
 
 
@@ -22,15 +25,47 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_centerInParent="true"
-            android:padding="56dp"
-            android:elevation="2dp"
-            android:scaleType="fitXY"
             android:layout_margin="24dp"
-            android:src="@drawable/face_shape"
             android:adjustViewBounds="true"
+            android:elevation="2dp"
+            android:padding="56dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/face_shape"
             android:tint="#F33131" />
 
     </amir.face.detection.utils.common.CameraSourcePreview>
 
+    <Button
+        android:id="@+id/takePhoto"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/button_selector"
+        android:enabled="false"
+        android:foreground="?android:attr/selectableItemBackground"
+        android:text="@string/take_photo"
+        android:textColor="#fff"
+        app:layout_constraintBottom_toBottomOf="@+id/firePreview"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
-</RelativeLayout>
+    <ImageView
+        android:id="@+id/test"
+        android:layout_width="72dp"
+        android:layout_height="wrap_content"
+        android:minHeight="100dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:adjustViewBounds="true"
+        app:layout_constraintBottom_toTopOf="@+id/takePhoto"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.947"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
