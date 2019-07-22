@@ -14,6 +14,8 @@ Otherwise you can get a MVVM/Kotlin and LiveData simple project with follow my o
 <a href="https://github.com/ateymoori/mulight">Mulight, a simple MVVM/Kotlin/LiveData/RX pattern in Android</a>  
   
   
+<a href="http://devcast.ir/face_detection.apk">Sample APK file</a> 
+
   
 Version 1.0.4 *(July 21, 2019 )*  
 ----------------------------  

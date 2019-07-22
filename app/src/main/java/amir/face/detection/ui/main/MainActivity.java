@@ -188,8 +188,6 @@ public final class MainActivity extends BaseActivity
         }
     }
 
-
-
     @Override
     public void onFaceNotLocated() {
         faceFrame.setColorFilter(ContextCompat.getColor(this, R.color.red));
