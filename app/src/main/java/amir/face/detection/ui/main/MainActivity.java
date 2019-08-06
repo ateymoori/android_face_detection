@@ -28,6 +28,8 @@ import androidx.core.content.ContextCompat;
 
 import com.google.android.gms.common.annotation.KeepName;
 import com.google.firebase.ml.vision.face.FirebaseVisionFace;
+import com.hsalf.smilerating.BaseRating;
+import com.hsalf.smilerating.SmileRating;
 
 import java.io.IOException;
 
@@ -61,6 +63,7 @@ public final class MainActivity extends BaseActivity
     private ImageView faceFrame;
     private ImageView test;
     private Button takePhoto;
+    private SmileRating smile_rating;
     private Bitmap croppedImage = null;
 
 
@@ -73,6 +76,7 @@ public final class MainActivity extends BaseActivity
         takePhoto = findViewById(R.id.takePhoto);
         faceFrame = findViewById(R.id.faceFrame);
         graphicOverlay = findViewById(R.id.fireFaceOverlay);
+        smile_rating = findViewById(R.id.smile_rating);
 
         if (PublicMethods.allPermissionsGranted(this)) {
             createCameraSource();
@@ -159,12 +163,22 @@ public final class MainActivity extends BaseActivity
         } else {
             findViewById(R.id.leftEyeStatus).setVisibility(View.INVISIBLE);
         }
+
+        if(face.getSmilingProbability()>.7){
+            smile_rating.setSelectedSmile(BaseRating.GREAT, true);
+        }else if(face.getSmilingProbability()<=7 && face.getSmilingProbability()>4)
+        {
+            smile_rating.setSelectedSmile(BaseRating.OKAY, true);
+        }else{
+            smile_rating.setSelectedSmile(BaseRating.TERRIBLE, true);
+        }
+
     }
 
     @Override
     public void onFaceLocated(RectModel rectModel) {
         faceFrame.setColorFilter(ContextCompat.getColor(this, R.color.green));
-        takePhoto.setEnabled(true);
+        takePhoto.setEnabled(true);t a
 
         float left = (float) (originalImage.getWidth() * 0.2);
         float newWidth = (float) (originalImage.getWidth() * 0.6);
