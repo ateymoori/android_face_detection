@@ -1,9 +1,9 @@
 
 # Android MLKit Sample (Google machine learning - Face Detection)  
   
-![](faceDetection.gif)
 
-  
+[![Android face detection demo](thumb.png)](https://www.youtube.com/watch?v=D5JaVT5IT7I)
+ 
   
 <img src="http://devcast.ir/mlkit.png" alt="google firebase mlkit face detection machine learning " width=600 />  
   
@@ -16,6 +16,12 @@ Otherwise you can get a MVVM/Kotlin and LiveData simple project with follow my o
   
 <a href="http://devcast.ir/face_detection.apk">Sample APK file</a> 
 
+  
+Version 1.0.5 *(Aug 6, 2019 )*  
+----------------------------  
+  
+First commit.   
+ * Add: Detect facial expression added.
   
 Version 1.0.4 *(July 21, 2019 )*  
 ----------------------------  

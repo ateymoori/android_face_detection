@@ -164,21 +164,27 @@ public final class MainActivity extends BaseActivity
             findViewById(R.id.leftEyeStatus).setVisibility(View.INVISIBLE);
         }
 
-        if(face.getSmilingProbability()>.7){
-            smile_rating.setSelectedSmile(BaseRating.GREAT, true);
-        }else if(face.getSmilingProbability()<=7 && face.getSmilingProbability()>4)
-        {
-            smile_rating.setSelectedSmile(BaseRating.OKAY, true);
+        int smile = 0;
+
+        if (face.getSmilingProbability() > .8) {
+            smile = BaseRating.GREAT ;
+        } else if (face.getSmilingProbability() <= .8 && face.getSmilingProbability() > .6) {
+            smile = BaseRating.GOOD ;
+        } else if (face.getSmilingProbability() <= .6 && face.getSmilingProbability() > .4) {
+            smile = BaseRating.OKAY ;
+        } else if (face.getSmilingProbability() <= .4 && face.getSmilingProbability() > .2) {
+            smile = BaseRating.BAD ;
         }else{
-            smile_rating.setSelectedSmile(BaseRating.TERRIBLE, true);
+            smile = BaseRating.TERRIBLE ;
         }
+        smile_rating.setSelectedSmile(smile, true);
 
     }
 
     @Override
     public void onFaceLocated(RectModel rectModel) {
         faceFrame.setColorFilter(ContextCompat.getColor(this, R.color.green));
-        takePhoto.setEnabled(true);t a
+        takePhoto.setEnabled(true);
 
         float left = (float) (originalImage.getWidth() * 0.2);
         float newWidth = (float) (originalImage.getWidth() * 0.6);
