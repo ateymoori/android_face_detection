@@ -46,7 +46,7 @@ public class FaceGraphic extends GraphicOverlay.Graphic {
 
     private final Bitmap overlayBitmap;
 
-    FaceDetectStatus  faceDetectStatus = null;
+    FaceDetectStatus faceDetectStatus = null;
 
 
     FaceGraphic(GraphicOverlay overlay, FirebaseVisionFace face, int facing, Bitmap overlayBitmap) {
@@ -93,7 +93,7 @@ public class FaceGraphic extends GraphicOverlay.Graphic {
         float top = y - yOffset;
         float right = x + xOffset;
         float bottom = y + yOffset;
-      //  canvas.drawRect(left, top, right, bottom, boxPaint);
+        canvas.drawRect(left, top, right, bottom, boxPaint);
 
         if (
                 left < 190 &&
@@ -102,9 +102,10 @@ public class FaceGraphic extends GraphicOverlay.Graphic {
                         bottom > 1050
         ) {
 
-            if(faceDetectStatus!=null) faceDetectStatus.onFaceLocated(new RectModel(left,top,right,bottom));
-        }else{
-            if(faceDetectStatus!=null) faceDetectStatus.onFaceNotLocated();
+            if (faceDetectStatus != null)
+                faceDetectStatus.onFaceLocated(new RectModel(left, top, right, bottom));
+        } else {
+            if (faceDetectStatus != null) faceDetectStatus.onFaceNotLocated();
         }
 
     }
