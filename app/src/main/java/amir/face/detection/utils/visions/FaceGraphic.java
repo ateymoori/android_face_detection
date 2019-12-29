@@ -55,7 +55,7 @@ public class FaceGraphic extends GraphicOverlay.Graphic {
         firebaseVisionFace = face;
         this.facing = facing;
         this.overlayBitmap = overlayBitmap;
-        final int selectedColor = Color.WHITE;
+        final int selectedColor = Color.GREEN;
 
         facePositionPaint = new Paint();
         facePositionPaint.setColor(selectedColor);

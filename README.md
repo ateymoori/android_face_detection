@@ -2,7 +2,7 @@
 # Android MLKit Sample (Google machine learning - Face Detection)  
   
 
-[![Android face detection demo](thumb.png)](https://www.youtube.com/watch?v=D5JaVT5IT7I)
+[![Android face detection demo](thumb.png)](https://www.youtube.com/watch?v=J4-t1SiGXXQ&feature=youtu.be)
  
   
 <img src="http://devcast.ir/mlkit.png" alt="google firebase mlkit face detection machine learning " width=600 />  
