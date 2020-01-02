@@ -174,8 +174,6 @@ public final class MainActivity extends BaseActivity
             smile = BaseRating.OKAY ;
         } else if (face.getSmilingProbability() <= .4 && face.getSmilingProbability() > .2) {
             smile = BaseRating.BAD ;
-        }else{
-            smile = BaseRating.TERRIBLE ;
         }
         smile_rating.setSelectedSmile(smile, true);
 
