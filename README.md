@@ -5,10 +5,9 @@
 [![Android face detection demo](files/thumb.png)](https://www.youtube.com/watch?v=J4-t1SiGXXQ&feature=youtu.be)
  
   
-  ![Alt text](files/face_flow.png?raw=true "Title")
+![Alt text](files/face_flow.png?raw=true "Face Detection Flow")
   
-<img src="http://devcast.ir/mlkit.png" alt="google firebase mlkit face detection machine learning " width=600 />  
-  
+   
 This repository contains a simple Android application that implements Google firebase MLKit(Machine learning kit) to face detection.  
 To avoid complication i used JAVA 8 and not implemented any architecture pattern (MVP or MVVM).  
 Otherwise you can get a MVVM/Kotlin and LiveData simple project with follow my other sample project.  
